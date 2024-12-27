@@ -1,107 +1,71 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-export XDEBUG_CONFIG="idekey=VSCODE"
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/panosdalitsouris/.oh-my-zsh"
+export PATH="/opt/homebrew/bin:$PATH"
 
-unsetopt nomatch
+setopt SHARE_HISTORY
+HISTFILE=$HOME/.zhistory
+SAVEHIST=1000
+HISTSIZE=999
+setopt HIST_EXPIRE_DUPS_FIRST
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export XDG_CONFIG_HOME=$HOME/.config
+export NODE_OPTIONS="--max-old-space-size=8192"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+alias cl='clear'
+alias lg=lazygit
+alias n=nvim
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+touchy() {
+  local file_path="$1"
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+  if [[ -z "$file_path" ]]; then
+    echo "Usage: touchy <file_path>"
+    return 1
+  fi
 
-# Uncomment the following line to enable command auto-correction.
-#ENABLE_CORRECTION="true"
+  # Extract the directory part of the file path
+  local dir_path="${file_path%/*}"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
- COMPLETION_WAITING_DOTS="true"
+  # Create the directory if it doesn't exist
+  mkdir -p "$dir_path"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+  # Create the file if it doesn't exist
+  touch "$file_path"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+  echo $file_path
+}
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+# Bind the Up Arrow key to search backward in history for commands starting with the current input
+bindkey '^[[A' history-search-backward
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  ruby
-  railss
-)
+# Bind the Down Arrow key to search forward in history for commands starting with the current input
+bindkey '^[[B' history-search-forward
 
-source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# Added by `rbenv init` on Sat Dec 14 10:01:36 EET 2024
+eval "$(rbenv init - --no-rehash zsh)"
 
-# export MANPATH="/usr/local/man:$MANPATH"
+if [[ "$TERM_PROGRAM" != "vscode" ]]; then
+	eval "$(oh-my-posh init zsh --config /users/panos/zash.omp.json)"
+	eval "$(zellij setup --generate-auto-start zsh)"
+fi
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-bindkey '[C' forward-word
-bindkey '[D' backward-word
-eval "$(rbenv init -)"
+eval "$(/opt/homebrew/bin/mise activate zsh)"
