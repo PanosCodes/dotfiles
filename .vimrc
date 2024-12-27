@@ -1,45 +1,24 @@
-export PATH="/opt/homebrew/bin:$PATH"
+set nocompatible               " be iMproved
+set clipboard^=unnamed
 
-setopt SHARE_HISTORY
-HISTFILE=$HOME/.zhistory
-SAVEHIST=1000
-HISTSIZE=999
-setopt HIST_EXPIRE_DUPS_FIRST
+" 1 tab to 2 space for ruby
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+" number line show
+set nu
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+set noswapfile
+"in order to switch between buffers with unsaved change
+set hidden
 
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+" cancel shift+k bind
+map <S-k> <Nop>
 
-alias cl=clear
-alias lg=lazygit
-alias n=nvim
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-
-# Added by Toolbox App
-export PATH="$PATH:/Users/panos/Library/Application Support/JetBrains/Toolbox/scripts"
-
-# Bind the Up Arrow key to search backward in history for commands starting with the current input
-bindkey '^[[A' history-search-backward
-
-# Bind the Down Arrow key to search forward in history for commands starting with the current input
-bindkey '^[[B' history-search-forward
-
-
-# Added by `rbenv init` on Sat Dec 14 10:01:36 EET 2024
-eval "$(rbenv init - --no-rehash zsh)"
-
-if [[ "$TERM_PROGRAM" != "vscode" ]]; then
-	eval "$(oh-my-posh init zsh --config /users/panos/zash.omp.json)"
-	eval "$(zellij setup --generate-auto-start zsh)"
-fi
-
-eval "$(/opt/homebrew/bin/mise activate zsh)"
+" hightlight column and line
+set cursorline
+"set cursorcolumn
+filetype plugin indent on
+syntax on
+nmap vv ^vg_
