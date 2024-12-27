@@ -1,0 +1,6 @@
+macos-titlebar-style = hidden
+quit-after-last-window-closed = true
+confirm-close-surface = false
+theme = nord
+clipboard-trim-trailing-spaces = true
+copy-on-select = true
