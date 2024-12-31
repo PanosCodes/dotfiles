@@ -23,6 +23,7 @@ vim.cmd([[Plug 'nvimtools/none-ls.nvim']])
 vim.cmd([[Plug 'nvim-telescope/telescope-frecency.nvim']])
 vim.cmd([[Plug 'https://git.sr.ht/~swaits/zellij-nav.nvim']])
 vim.cmd([[Plug 'akinsho/toggleterm.nvim']])
+vim.cmd([[Plug 'cappyzawa/trim.nvim']])
 
 -- NeoTree
 vim.cmd([[Plug 'nvim-lua/plenary.nvim']])
@@ -33,7 +34,7 @@ vim.cmd([[Plug 'nvim-neo-tree/neo-tree.nvim']])
 vim.cmd("call plug#end()")
 -- END Plugins
 
--- START Setups 
+-- START Setups
 -- require('mason').setup()
 require('onenord').setup()
 require("auto-save").setup()
@@ -41,6 +42,24 @@ require('gitsigns').setup()
 require('nvim-autopairs').setup()
 require("zellij-nav").setup()
 require("toggleterm").setup()
+require("trim").setup({
+  trim_on_write = true,
+  trim_trailing = true,
+  trim_last_line = false,
+  trim_first_line = true,
+})
+
+require("telescope").setup({
+  defaults = {
+    layout_config = {
+      vertical = {
+        mirror = true,
+      },
+    },
+    sorting_strategy = "ascending",
+    prompt_position = "bottom",
+  },
+})
 
 local lspconfig = require('lspconfig')
 lspconfig.ruby_lsp.setup({
@@ -62,12 +81,12 @@ require("neo-tree").setup({
   },
   filesystem = {
         use_libuv_file_watcher = true,
-       hijack_netrw_behavior = "open_default",
+        hijack_netrw_behavior = "open_default",
         filtered_items = {
           visible = true,
           show_hidden_count = true,
           hide_dotfiles = false,
-          hide_gitignored = true,
+          hide_gitignored = false,
           hide_by_name = {
              '.git',
              '.DS_Store',
@@ -88,13 +107,15 @@ vim.api.nvim_create_autocmd("VimLeave", {
     pattern = "*",
     command = "silent !zellij action switch-mode normal"
 })
+
+
 -- END Setups
 
 -- START Keymaps
 
 vim.g.mapleader = " "
 
--- Telescope 
+-- Telescope
 vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", { noremap = true, silent = true })
@@ -104,5 +125,6 @@ vim.api.nvim_set_keymap("n", '<leader>fu', ':lua require("telescope.builtin").ls
 
 vim.api.nvim_set_keymap("v", "C-[", '<gv', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "C-]", '>gv', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>bb", ':Neotree toggle<cr>', { noremap = true, silent =true })
 
 -- END Keymaps
