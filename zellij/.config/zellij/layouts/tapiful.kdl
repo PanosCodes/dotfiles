@@ -1,0 +1,36 @@
+layout {
+    default_tab_template {
+        // the default zellij tab-bar and status bar plugins
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+
+  tab name="Server" split_direction="horizontal" {
+    pane command="zsh" {
+      args "-c" "source /Users/panos/.zshrc && ngrok http --url=tapiful.ngrok.app 3000"
+    }
+
+    pane command="zsh"{
+      args "-c" "source /Users/panos/.zshrc && /Users/panos/Code/tapiful/bin/rails s"
+    }
+  }
+
+  tab name="Mobile" split_direction="horizontal" {
+    pane command="zsh"{
+      args "-c" "source /Users/panos/.zshrc && cd /Users/panos/Code/tapiful-mobile && npm start"
+    }
+ }
+}
+
+
+ui {
+    pane_frames {
+        rounded_corners true
+        hide_session_name true
+    }
+}
