@@ -1,0 +1,11 @@
+macos-titlebar-style = hidden
+quit-after-last-window-closed = true
+confirm-close-surface = false
+theme = onenord
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = false
+copy-on-select = true
+macos-option-as-alt = true
+
+
+
