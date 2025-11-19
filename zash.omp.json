@@ -1,0 +1,68 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "#c4c4c4",
+          "properties": {
+            "branch_icon": ""
+          },
+          "style": "plain",
+          "template": "\u256d\u2500\u2500",
+          "type": "git"
+        },
+        {
+          "foreground": "#BF616A",
+          "style": "plain",
+          "template": "@{{ .UserName }}",
+          "type": "session"
+        },
+        {
+          "foreground": "#c4c4c4",
+          "properties": {
+            "style": "folder"
+          },
+          "style": "plain",
+          "template": "{{ if .Segments.Git.RepoName }} \ue729 {{ .Path }}{{ end }}",
+          "type": "path"
+        },
+        {
+          "foreground": "#9d7fb8",
+          "properties": {
+            "branch_icon": ""
+          },
+          "style": "plain",
+          "template": " \ue725 {{ .HEAD }}\n\u2570\u2500",
+          "type": "git"
+        },
+        {
+          "foreground": "#81A1C1",
+          "properties": {
+            "style": "full"
+          },
+          "style": "plain",
+          "template": "{{ if not .Segments.Git.RepoName }} {{ .Path }}{{ end }}{{ if .Segments.Git.RepoName }} \uf07c {{ .Path }}{{ end }}",
+          "type": "path"
+        },
+        {
+          "foreground": "#B48EAD",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#BF616A{{ end }}"
+          ],
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "plain",
+          "template": " \u276f ",
+          "type": "status"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "final_space": true,
+  "version": 3
+}
