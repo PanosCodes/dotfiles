@@ -39,7 +39,7 @@ function obj:init()
     end
 
     -- Set up the hotkey to switch app
-    self.hs.hotkey.bind({"cmd"}, "`", function() self:switchApp() end)
+    self.hs.hotkey.bind({"cmd"}, "escape", function() self:switchApp() end)
 end
 
 return obj
