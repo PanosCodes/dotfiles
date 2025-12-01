@@ -67,10 +67,6 @@ bindkey '^[[A' history-search-backward
 # Bind the Down Arrow key to search forward in history for commands starting with the current input
 bindkey '^[[B' history-search-forward
 
-
-# Added by `rbenv init` on Sat Dec 14 10:01:36 EET 2024
-eval "$(rbenv init - --no-rehash zsh)"
-
 if [[ "$TERM_PROGRAM" != "vscode" ]]; then
 	eval "$(oh-my-posh init zsh --config /users/panos/zash.omp.json)"
 	eval "$(zellij setup --generate-auto-start zsh)"
