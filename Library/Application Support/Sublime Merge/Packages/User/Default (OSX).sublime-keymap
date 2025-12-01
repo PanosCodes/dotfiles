@@ -1,0 +1,94 @@
+[
+    {
+        "keys": [
+            "super+k"
+        ],
+        "command": "move_commit",
+        "args": {
+            "commit": "$commit",
+            "down": false
+        }
+    },
+    {
+        "keys": [
+            "super+j"
+        ],
+        "command": "move_commit",
+        "args": {
+            "commit": "$commit",
+            "down": true
+        }
+    },
+    {
+        "keys": [
+            "super+l"
+        ],
+        "command": "navigate_to_commit_message",
+        "args": {
+            "commit": "$commit",
+            "down": true
+        }
+    },
+    {
+        "keys": [
+            "super+e"
+        ],
+        "command": "edit_commit",
+        "args": {
+            "commit": "$commit"
+        }
+    },
+    {
+        "keys": [
+            "super+shift+e"
+        ],
+        "command": "edit_commit_contents",
+        "args": {
+            "commit": "$commit"
+        }
+    },
+    {
+        "keys": [
+            "super+shift+j"
+        ],
+        "command": "chain",
+        "args": {
+            "commands": [
+                {
+                    "command": "stage_all"
+                },
+                {
+                    "command": "commit",
+                    "args": {
+                        "mode": "commit --amend"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "keys": [
+            "super+shift+enter"
+        ],
+        "command": "chain",
+        "args": {
+            "commands": [
+                {
+                    "command": "stage_all"
+                },
+                {
+                    "command": "commit",
+                    "args": {
+                        "mode": "commit --amend"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "keys": [
+            "super+shift+s"
+        ],
+        "command": "stage_all"
+    }
+]
